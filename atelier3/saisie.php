@@ -13,6 +13,10 @@ if(isset($_POST)):
     d($_POST);
 endif;
 
+if(isset($_FILES)):
+    d($_FILES);
+endif;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,7 +33,7 @@ endif;
     <?php include "nav.php"; ?>
     <div class="row">
         <div class="col-lg-6 col-lg-push-2">
-            <form action="saisie.php" method="get">
+            <form action="validation.php" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label for="ville" class="col-lg-3 control-label">Nom d'une ville</label>
                     <div class="col-lg-9">
@@ -42,9 +46,15 @@ endif;
                         <input type="text" name="temperature" class="form-control" placeholder="Indiquer la température"/>
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label">Icone</label>
+                    <div class="col-lg-9">
+                        <input type="file" name="temperature" class="form-control" placeholder="Indiquer la température"/>
+                    </div>
+
+                </div>
                 <div class="form-group col-lg-9 col-lg-push-3">
                     <button type="submit" class="btn btn-default">Valider</button>
-
                 </div>
 
 

@@ -9,8 +9,6 @@ function afficheTemperature(string $ville, array $detail){
 
     $temperature=$detail['temperature'];
 
-
-
     $chaine="La température de {ville} est de {temperature} degrés";
     $chaine=preg_replace('/{ville}/',$ville,$chaine);
     $chaine=preg_replace('/{temperature}/',$temperature,$chaine);

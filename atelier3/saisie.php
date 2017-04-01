@@ -37,6 +37,12 @@ endif;
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-lg-3 control-label">Votre Email</label>
+                    <div class="col-lg-9">
+                        <input type="email" name="email" class="form-control" placeholder="Indiquer une adresse email valide"/>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-lg-3 control-label">Icone</label>
                     <div class="col-lg-9">
                         <input type="file" name="temperature" class="form-control" placeholder="Indiquer la température"/>

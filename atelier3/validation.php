@@ -25,7 +25,7 @@ d($_POST);
             <?php else: ?>
                 <p class="alert-danger">La ville n'est pas du bon type</p>
             <?php endif; ?>
-            
+
 
         </div>
         <div class="col-lg-4">
@@ -41,6 +41,15 @@ d($_POST);
                 <p class="alert-success">La température passe le test du filtre</p>
             <?php else: ?>
                 <p class="alert-danger">La température ne passe pas le test du filtre</p>
+            <?php endif; ?>
+        </div>
+        <div class="col-lg-4">
+            <h4>Test de la valeur pour l'email</h4>
+            <?php
+            if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)): ?>
+                <p class="alert-success">L'email passe le test du filtre</p>
+            <?php else: ?>
+                <p class="alert-danger">L'email ne passe pas le test du filtre</p>
             <?php endif; ?>
         </div>
     </div>

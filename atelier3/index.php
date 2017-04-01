@@ -23,9 +23,13 @@ $meteo=ajouterCommentaire($meteo);
                     <div class="panel-heading">
                         <?php echo $res['phrase']; ?>
                     </div>
+                    <?php
+                    if(isset($res['icone']) && strlen($res['icone'])>1):
+                    ?>
                     <div class="panel-body">
                         <?php echo $res['icone']; ?>
                     </div>
+                    <?php endif; ?>
                     <?php
                     if(isset($detail['commentaire'])):
                         ?>

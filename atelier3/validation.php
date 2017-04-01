@@ -8,7 +8,6 @@
 
 include "composants/header.php";
 
-d($_POST);
 
 ?>
 <?php include "nav.php"; ?>
@@ -31,15 +30,24 @@ d($_POST);
         <div class="col-lg-4">
             <h4>Test de la valeur pour la Température</h4>
             <?php
-            if(ctype_digit($_POST['temperature'])): ?>
+            $ajoutVille=false;
+            if(ctype_digit($_POST['temperature'])):
+                $ajoutVille=true;
+                ?>
                 <p class="alert-success">La température est du bon type</p>
-            <?php else: ?>
+            <?php else:
+                $ajoutVille=false;
+                ?>
                 <p class="alert-danger">La température n'est pas du bon type</p>
             <?php endif; ?>
             <?php
-            if(filter_var($_POST['temperature'],FILTER_VALIDATE_INT)): ?>
+            if(filter_var($_POST['temperature'],FILTER_VALIDATE_INT)):
+                $ajoutTemperature=true;
+            ?>
                 <p class="alert-success">La température passe le test du filtre</p>
-            <?php else: ?>
+            <?php else:
+                $ajoutTemperature=true;
+            ?>
                 <p class="alert-danger">La température ne passe pas le test du filtre</p>
             <?php endif; ?>
         </div>
@@ -60,6 +68,50 @@ d($_POST);
 
         </div>
     </div>
+
+    <?php
+    /*
+     * Ajout des valeurs si les conditions sont respectées
+     */
+    if(true==$ajoutVille && true==$ajoutTemperature):
+        $meteo[$_POST['ville']]['temperature']=$_POST['temperature'];
+    endif;
+    ?>
+    <div class="row">
+        <?php
+        d($meteo);
+        foreach($meteo as $ville=>$detail):
+            ?>
+            <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1">
+
+                <?php $res= afficheTemperature($ville,$detail);
+                ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <?php echo $res['phrase']; ?>
+                    </div>
+                    <?php
+                    if(isset($detail['icone']) && strlen($detail['icone'])>1):
+                        ?>
+                        <div class="panel-body">
+                            <?php echo $res['icone']; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php
+                    if(isset($detail['commentaire'])):
+                        ?>
+                        <div class="panel-footer">
+                            <?php echo $detail['commentaire']; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php
+        endforeach;
+        ?>
+
+</div>
+
 
 </div>
 

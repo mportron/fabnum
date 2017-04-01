@@ -20,6 +20,8 @@ $meteo=ajouterCommentaire($meteo);
 <div class="container">
 
     <div class="jumbotron"><h1>La météo des plages</h1></div>
+    <?php include "nav.php"; ?>
+
     <div class="row">
         <?php
 

@@ -26,6 +26,7 @@ endif;
 <div class="container">
 
     <div class="jumbotron"><h1>La météo des plages / Saisie</h1></div>
+    <?php include "nav.php"; ?>
     <div class="row">
         <div class="col-lg-6 col-lg-push-2">
             <form action="saisie.php" method="get">

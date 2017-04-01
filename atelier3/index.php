@@ -1,26 +1,15 @@
 <?php
-require '../../kint/Kint.class.php';
-include_once "mes_fonctions.php";
-include "datas.php";
+include "composants/header.php";
 
 $meteo=triVilleTemperatureMinimum($meteo,16);
 $meteo=ajouterCommentaire($meteo);
 
-
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>La météo des plages</title>
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
-
-</head>
-<body>
-
+<?php include "nav.php"; ?>
 <div class="container">
 
     <div class="jumbotron"><h1>La météo des plages</h1></div>
-    <?php include "nav.php"; ?>
+
 
     <div class="row">
         <?php
@@ -51,8 +40,10 @@ $meteo=ajouterCommentaire($meteo);
         ?>
     </div>
 </div>
-</body>
-</html>
+<?php
+include "composants/footer.php";
+?>
+
 
 
 

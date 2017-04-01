@@ -1,7 +1,5 @@
 <?php
-require '../../kint/Kint.class.php';
-include_once "mes_fonctions.php";
-include "datas.php";
+include "composants/header.php";
 
 $meteo=triVilleTemperatureMinimum($meteo,16);
 $meteo=ajouterCommentaire($meteo);
@@ -18,19 +16,11 @@ if(isset($_FILES)):
 endif;
 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>La météo des plages / saisie</title>
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet"/>
-
-</head>
-<body>
-
+<?php include "nav.php"; ?>
 <div class="container">
 
     <div class="jumbotron"><h1>La météo des plages / Saisie</h1></div>
-    <?php include "nav.php"; ?>
+
     <div class="row">
         <div class="col-lg-6 col-lg-push-2">
             <form action="validation.php" method="post" enctype="multipart/form-data">
@@ -62,8 +52,9 @@ endif;
         </div>
     </div>
 </div>
-</body>
-</html>
+<?php
+include "composants/footer.php";
+?>
 
 
 

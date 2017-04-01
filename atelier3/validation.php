@@ -46,11 +46,18 @@ d($_POST);
         <div class="col-lg-4">
             <h4>Test de la valeur pour l'email</h4>
             <?php
+            if(filter_input(INPUT_POST,'email',FILTER_SANITIZE_NUMBER_INT)): ?>
+                <p class="alert-success">L'email passe le test du filtre de conversion</p>
+            <?php else: ?>
+                <p class="alert-danger">L'email ne passe pas le test du  filtre de conversion</p>
+            <?php endif; ?>
+            <?php
             if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)): ?>
                 <p class="alert-success">L'email passe le test du filtre</p>
             <?php else: ?>
                 <p class="alert-danger">L'email ne passe pas le test du filtre</p>
             <?php endif; ?>
+
         </div>
     </div>
 

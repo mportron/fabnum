@@ -79,7 +79,7 @@ include "composants/header.php";
     ?>
     <div class="row">
         <?php
-        d($meteo);
+        
         foreach($meteo as $ville=>$detail):
             ?>
             <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1">

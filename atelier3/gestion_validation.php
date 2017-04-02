@@ -6,8 +6,6 @@
  * Time: 08:57
  */
 
-d($_POST);
-
 
 $ajoutFichier=false;
 

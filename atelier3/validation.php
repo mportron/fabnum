@@ -9,6 +9,20 @@
 include "composants/header.php";
 
 
+
+$ajoutFichier=false;
+
+///// traitement du fichier s'il existe
+if(isset($_FILES['icone'])):
+    $fichier=$_FILES['icone']['tmp_name'];
+    if(preg_match('/image/',$_FILES['icone']['type'])):
+        $destination='icones_meteo/'.$_FILES['icone']['name'];
+        move_uploaded_file($fichier,$destination);
+        $ajoutFichier=true;
+
+    endif;
+endif;
+
 ?>
 <?php include "nav.php"; ?>
 <div class="container">
@@ -43,11 +57,11 @@ include "composants/header.php";
             <?php
             if(filter_var($_POST['temperature'],FILTER_VALIDATE_INT)):
                 $ajoutTemperature=true;
-            ?>
+                ?>
                 <p class="alert-success">La température passe le test du filtre</p>
             <?php else:
                 $ajoutTemperature=true;
-            ?>
+                ?>
                 <p class="alert-danger">La température ne passe pas le test du filtre</p>
             <?php endif; ?>
         </div>
@@ -67,7 +81,7 @@ include "composants/header.php";
             <?php endif; ?>
 
         </div>
-    </div>
+
 
     <?php
     /*
@@ -75,11 +89,18 @@ include "composants/header.php";
      */
     if(true==$ajoutVille && true==$ajoutTemperature):
         $meteo[$_POST['ville']]['temperature']=$_POST['temperature'];
+        if(true==$ajoutFichier):
+            $meteo[$_POST['ville']]['icone']=$destination;
+        endif;
+
     endif;
     ?>
+
+
+    </div>
     <div class="row">
         <?php
-        
+
         foreach($meteo as $ville=>$detail):
             ?>
             <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1">
@@ -109,9 +130,27 @@ include "composants/header.php";
             <?php
         endforeach;
         ?>
-
-</div>
-
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Ville</th>
+                    <th>T&deg;</th>
+                    <th>Image</th>
+                </tr>
+                <?php
+                reset($meteo);
+                foreach($meteo as $ville=>$detail): ?>
+                    <tr>
+                        <td><?php echo $ville; ?></td>
+                        <td><?php echo $detail['temperature']; ?></td>
+                        <td><?php echo $detail['icone']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
 
 </div>
 

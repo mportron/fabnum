@@ -45,7 +45,7 @@ endif;
                 <div class="form-group row">
                     <label class="col-lg-3 control-label">Icone</label>
                     <div class="col-lg-9">
-                        <input type="file" name="temperature" class="form-control" placeholder="Indiquer la température"/>
+                        <input type="file" name="icone" class="form-control" placeholder="Indiquer la température"/>
                     </div>
 
                 </div>

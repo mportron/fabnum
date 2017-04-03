@@ -31,7 +31,7 @@ endif;
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 control-label">Température</label>
+                    <label class="col-lg-3 control-label">Temp&eacute;rature</label>
                     <div class="col-lg-9">
                         <input type="text" name="temperature" class="form-control" placeholder="Indiquer la température"/>
                     </div>
@@ -43,9 +43,9 @@ endif;
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 control-label">Icone</label>
+                    <label class="col-lg-3 control-label">Ic&ocirc;ne</label>
                     <div class="col-lg-9">
-                        <input type="file" name="icone" class="form-control" placeholder="Indiquer la température"/>
+                        <input type="file" name="icone" />
                     </div>
 
                 </div>

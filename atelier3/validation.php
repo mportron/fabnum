@@ -11,6 +11,8 @@ include "composants/header.php";
 
 
 $ajoutFichier=false;
+$ajoutVille=false;
+$ajoutTemperature=false;
 
 ///// traitement du fichier s'il existe
 if(isset($_FILES['icone'])):
@@ -33,7 +35,9 @@ endif;
         <div class="col-lg-4">
             <h4>Test de la valeur pour la Ville</h4>
             <?php
-            if(ctype_alpha($_POST['ville'])): ?>
+            if(ctype_alpha($_POST['ville'])):
+                $ajoutVille=true;
+                ?>
                 <p class="alert-success">La ville est du bon type</p>
             <?php else: ?>
                 <p class="alert-danger">La ville n'est pas du bon type</p>
@@ -44,13 +48,13 @@ endif;
         <div class="col-lg-4">
             <h4>Test de la valeur pour la Température</h4>
             <?php
-            $ajoutVille=false;
+
             if(ctype_digit($_POST['temperature'])):
-                $ajoutVille=true;
+                $ajoutTemperature=true;
                 ?>
                 <p class="alert-success">La température est du bon type</p>
             <?php else:
-                $ajoutVille=false;
+                $ajoutTemperature=false;
                 ?>
                 <p class="alert-danger">La température n'est pas du bon type</p>
             <?php endif; ?>

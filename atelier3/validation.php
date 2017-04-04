@@ -7,24 +7,6 @@
  */
 
 include "composants/header.php";
-
-
-
-$ajoutFichier=false;
-$ajoutVille=false;
-$ajoutTemperature=false;
-
-///// traitement du fichier s'il existe
-if(isset($_FILES['icone'])):
-    $fichier=$_FILES['icone']['tmp_name'];
-    if(preg_match('/image/',$_FILES['icone']['type'])):
-        $destination='icones_meteo/'.$_FILES['icone']['name'];
-        move_uploaded_file($fichier,$destination);
-        $ajoutFichier=true;
-
-    endif;
-endif;
-
 ?>
 <?php include "nav.php"; ?>
 <div class="container">
@@ -32,6 +14,9 @@ endif;
     <h1>Validation</h1>
 
     <div class="row">
+
+        <?php include "gestion_validation.php"; ?>
+
         <div class="col-lg-4">
             <h4>Test de la valeur pour la Ville</h4>
             <?php
@@ -99,62 +84,13 @@ endif;
 
     endif;
     ?>
-
-
     </div>
     <div class="row">
         <?php
-
-        foreach($meteo as $ville=>$detail):
-            ?>
-            <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1">
-
-                <?php $res= afficheTemperature($ville,$detail);
-                ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <?php echo $res['phrase']; ?>
-                    </div>
-                    <?php
-                    if(isset($detail['icone']) && strlen($detail['icone'])>1):
-                        ?>
-                        <div class="panel-body">
-                            <?php echo $res['icone']; ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php
-                    if(isset($detail['commentaire'])):
-                        ?>
-                        <div class="panel-footer">
-                            <?php echo $detail['commentaire']; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <?php
-        endforeach;
+        include "affichage_meteo.php";
         ?>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <table class="table table-bordered">
-                <tr>
-                    <th>Ville</th>
-                    <th>T&deg;</th>
-                    <th>Image</th>
-                </tr>
-                <?php
-                reset($meteo);
-                foreach($meteo as $ville=>$detail): ?>
-                    <tr>
-                        <td><?php echo $ville; ?></td>
-                        <td><?php echo $detail['temperature']; ?></td>
-                        <td><?php echo $detail['icone']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        </div>
-    </div>
+    <?php include "tableau_recap.php"; ?>
 
 </div>
 
@@ -162,6 +98,3 @@ endif;
 <?php
 include "composants/footer.php";
 ?>
-
-
-

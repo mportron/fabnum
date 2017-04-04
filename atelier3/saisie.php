@@ -1,19 +1,19 @@
 <?php
 include "composants/header.php";
 
-$meteo=triVilleTemperatureMinimum($meteo,16);
-$meteo=ajouterCommentaire($meteo);
-if(isset($_GET)):
-    d($_GET);
-endif;
-
-if(isset($_POST)):
-    d($_POST);
-endif;
-
-if(isset($_FILES)):
-    d($_FILES);
-endif;
+//$meteo=triVilleTemperatureMinimum($meteo,16);
+//$meteo=ajouterCommentaire($meteo);
+//if(isset($_GET)):
+//    d($_GET);
+//endif;
+//
+//if(isset($_POST)):
+//    d($_POST);
+//endif;
+//
+//if(isset($_FILES)):
+//    d($_FILES);
+//endif;
 
 ?>
 <?php include "nav.php"; ?>
@@ -37,18 +37,20 @@ endif;
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 control-label">Votre Email</label>
+                    <label class="col-lg-3 control-label">Fichier local</label>
                     <div class="col-lg-9">
-                        <input type="email" name="email" class="form-control" placeholder="Indiquer une adresse email valide"/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-lg-3 control-label">Ic&ocirc;ne</label>
-                    <div class="col-lg-9">
-                        <input type="file" name="icone" />
+                        <input type="file" name="file_local" />
                     </div>
 
                 </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 control-label">Image distante</label>
+                    <div class="col-lg-9">
+                        <input type="url" name="file_url" />
+                    </div>
+
+                </div>
+
                 <div class="form-group col-lg-9 col-lg-push-3">
                     <button type="submit" class="btn btn-default">Valider</button>
                 </div>

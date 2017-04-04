@@ -1,7 +1,8 @@
 <?php
 include "composants/header.php";
 
-$meteo=triVilleTemperatureMinimum($meteo,16);
+$meteo=chargerDatas();//fonction qui charge le fichier en mémoire
+$meteo=triVilleTemperatureMinimum($meteo,-16);
 $meteo=ajouterCommentaire($meteo);
 
 ?>

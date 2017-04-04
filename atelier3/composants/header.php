@@ -8,9 +8,6 @@
 
 require '../../kint/Kint.class.php';
 include_once "mes_fonctions.php";
-include "datas.php";
-
-
 
 ?>
 <!DOCTYPE html>

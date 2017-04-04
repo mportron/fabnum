@@ -7,40 +7,51 @@
  */
 
 
+$ajoutVille=false;
+$ajoutTemperature=false;
 $ajoutFichier=false;
 
 ///// traitement du fichier s'il existe
-if(isset($_FILES['icone'])):
-    $fichier=$_FILES['icone']['tmp_name'];
-    if(preg_match('/image/',$_FILES['icone']['type'])):
-        $destination='icones_meteo/'.$_FILES['icone']['name'];
+if(isset($_FILES['file_local'])):
+    $fichier=$_FILES['file_local']['tmp_name'];
+    if(preg_match('/image/',$_FILES['file_local']['type'])):
+        $destination='icones_meteo/'.$_FILES['file_local']['name'];
         move_uploaded_file($fichier,$destination);
         $ajoutFichier=true;
 
     endif;
 endif;
 ?>
-<div class="col-lg-4">
-            <h4>Test de la valeur pour la Ville</h4>
-            <?php
-            if(ctype_alpha($_POST['ville'])): ?>
-                <p class="alert-success">La ville est du bon type</p>
-            <?php else: ?>
-                <p class="alert-danger">La ville n'est pas du bon type</p>
-            <?php endif; ?>
+
+<?php
+////// TEST DE LA VILLE
+?>
+    <div class="col-lg-4">
+        <h4>Test de la valeur pour la Ville</h4>
+        <?php
+        if(ctype_alpha($_POST['ville'])):
+            $ajoutVille=true;
+            ?>
+            <p class="alert-success">La ville est du bon type</p>
+        <?php else: ?>
+            <p class="alert-danger">La ville n'est pas du bon type</p>
+        <?php endif; ?>
 
 
     </div>
+<?php
+//// TEST DE LA TEMPERATURE
+?>
     <div class="col-lg-4">
         <h4>Test de la valeur pour la Température</h4>
         <?php
-        $ajoutVille=false;
+        $ajoutTemperature=false;
         if(ctype_digit($_POST['temperature'])):
-            $ajoutVille=true;
+            $ajoutTemperature=true;
             ?>
             <p class="alert-success">La température est du bon type</p>
         <?php else:
-            $ajoutVille=false;
+            $ajoutTemperature=false;
             ?>
             <p class="alert-danger">La température n'est pas du bon type</p>
         <?php endif; ?>
@@ -55,33 +66,64 @@ endif;
             <p class="alert-danger">La température ne passe pas le test du filtre</p>
         <?php endif; ?>
     </div>
-    <div class="col-lg-4">
-        <h4>Test de la valeur pour l'email</h4>
-        <?php
-        if(filter_input(INPUT_POST,'email',FILTER_SANITIZE_NUMBER_INT)): ?>
-            <p class="alert-success">L'email passe le test du filtre de conversion</p>
-        <?php else: ?>
-            <p class="alert-danger">L'email ne passe pas le test du  filtre de conversion</p>
-        <?php endif; ?>
-        <?php
-        if(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)): ?>
-            <p class="alert-success">L'email passe le test du filtre</p>
-        <?php else: ?>
-            <p class="alert-danger">L'email ne passe pas le test du filtre</p>
-        <?php endif; ?>
-
-    </div>
-
-
 <?php
-    /*
-     * Ajout des valeurs si les conditions sont respectées
-     */
-    if(true==$ajoutVille && true==$ajoutTemperature):
-        $meteo[$_POST['ville']]['temperature']=$_POST['temperature'];
-        if(true==$ajoutFichier):
-            $meteo[$_POST['ville']]['icone']=$destination;
+/// TEST URL IMAGE DISTANTE
+if(isset($_POST['file_url']) && strlen($_POST['file_url'])>5):
+    ?>
+    <div class="col-lg-4">
+        <h4>Test de la valeur de l'url de l'image distante</h4>
+        <?php
+        $ajoutUrl=false;
+        $classe="alert-danger";
+        $message='';
+        if(filter_input(INPUT_POST,'file_url',FILTER_SANITIZE_URL)):
+            $ajoutUrl=true;
+            if(filter_var($_POST['file_url'],FILTER_VALIDATE_URL)):
+                $ajoutUrl=true;
+            else:
+                $ajoutUrl=false;
+            endif;
         endif;
 
+        if(true==$ajoutUrl):
+            $classe="alert-success";
+            $message="L'url de l'image vérifie tous les tests";
+        else:
+            $classe="alert-danger";
+            $message="L'url de l'image ne vérifie pas tous les tests";
+        endif;
+        ?>
+        <p class="<?php echo $classe; ?>"><?php echo $message; ?></p>
+    </div>
+<?php endif; ?>
+
+<?php
+/*
+ * Ajout des valeurs si les conditions sont respectées
+ */
+if(true==$ajoutVille && true==$ajoutTemperature):
+
+///Ecriture dans le fichier datas-sources/datas.csv
+
+    $fDatas=fopen('datas-sources/datas.csv',a);
+
+    $ligneAEcrire=[
+        $_POST['ville'],
+        $_POST['temperature']
+    ];
+
+
+    if(true==$ajoutFichier):
+        $ligneAEcrire[]=$destination;
+        $ligneAEcrire[]='fichier'; // on indique la provenance... ici c'est un fichier local
     endif;
-    ?>
+
+    if(true==$ajoutUrl):
+        $ligneAEcrire[]=$_POST['file_url'];
+        $ligneAEcrire[]='url';// et dans ce cas la provenance est une url
+    endif;
+
+    fputcsv($fDatas,$ligneAEcrire,";",'"');
+    fclose($fDatas);
+endif;
+?>

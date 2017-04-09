@@ -7,6 +7,7 @@
  */
 
 include "composants/header.php";
+
 ?>
 <?php include "nav.php"; ?>
 <div class="container">
@@ -34,3 +35,6 @@ include "composants/header.php";
 <?php
 include "composants/footer.php";
 ?>
+
+
+

@@ -1,15 +1,25 @@
 <?php
+
+
+
 /**
  * Created by PhpStorm.
  * User: patjoub
  * Date: 02/04/17
  * Time: 09:02
  */
+
+reset($meteo);
 foreach($meteo as $ville=>$detail):
+
+    $code=calculer_attributs_ville($detail);
+
+
     ?>
-    <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1">
+    <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1 <?php echo $code; ?>">
 
         <?php $res= afficheTemperature($ville,$detail);
+
         ?>
         <div class="panel panel-default">
             <div class="panel-heading">

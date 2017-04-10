@@ -106,4 +106,18 @@ function chargerDatas(){
     return $datas;
 }
 
+function calculer_attributs_ville($detail){
+    global $regles;
+
+
+    $code_a_appliquer='';
+
+
+    foreach($regles as $code=>$regle){
+        if($detail['temperature']>$regle['filtre']['min'] && $detail['temperature']<=$regle['filtre']['max']){
+               $code_a_appliquer=$code;
+        }
+    }
+    return $code_a_appliquer;
+}
 ?>

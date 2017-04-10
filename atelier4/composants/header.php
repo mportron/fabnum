@@ -7,7 +7,8 @@
  */
 
 require '../../kint/Kint.class.php';
-include_once "mes_fonctions.php";
+include_once 'config/regle.inc';
+include "mes_fonctions.php";
 
 ?>
 <!DOCTYPE html>

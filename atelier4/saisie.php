@@ -1,19 +1,6 @@
 <?php
-include "composants/header.php";
 
-//$meteo=triVilleTemperatureMinimum($meteo,16);
-//$meteo=ajouterCommentaire($meteo);
-//if(isset($_GET)):
-//    d($_GET);
-//endif;
-//
-//if(isset($_POST)):
-//    d($_POST);
-//endif;
-//
-//if(isset($_FILES)):
-//    d($_FILES);
-//endif;
+include "composants/header.php";
 
 ?>
 <?php include "nav.php"; ?>
@@ -23,7 +10,7 @@ include "composants/header.php";
 
     <div class="row">
         <div class="col-lg-6 col-lg-push-2">
-            <form action="validation.php" method="post" enctype="multipart/form-data">
+            <form action="validation.php" id="saisie" method="post" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label for="ville" class="col-lg-3 control-label">Nom d'une ville</label>
                     <div class="col-lg-9">
@@ -63,7 +50,7 @@ include "composants/header.php";
 <?php
 include "composants/footer.php";
 ?>
-
-
+<script type="text/javascript" src="js/jquery_validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/valider_formulaire.js"></script>
 
 

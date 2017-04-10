@@ -15,9 +15,12 @@ $meteo=triVilleTemperatureMinimum($meteo,-16);
     <nav class="navbar navbar-default">
         <div class="container">
             <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" id="reset" class="reset">RAZ</a>
+                </li>
                 <?php
                 foreach($regles as $code=>$item): ?>
-                    <li><a href="#" data-code="<?php echo $code; ?>"><?php echo $item['libelle']; ?></a></li>
+                    <li><a href="#reset" class="filtre-temp" data-code="<?php echo $code; ?>"><?php echo $item['libelle']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

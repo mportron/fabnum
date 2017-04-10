@@ -13,14 +13,10 @@ reset($meteo);
 foreach($meteo as $ville=>$detail):
 
     $code=calculer_attributs_ville($detail);
-
-
     ?>
-    <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1 <?php echo $code; ?>">
+    <div class="col-lg-3 col-sm-6 col-xs-10 col-sm-push-0 col-xs-push-1 ville"  data-temp="<?php echo $code; ?>">
 
-        <?php $res= afficheTemperature($ville,$detail);
-
-        ?>
+        <?php $res= afficheTemperature($ville,$detail); ?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <?php echo $res['phrase']; ?>

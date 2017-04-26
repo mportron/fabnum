@@ -6,12 +6,8 @@
  * Date: 14/04/17
  * Time: 11:25
  */
-class Voiture
+class Voiture extends Vehicule
 {
-
-    private $marque;
-    private $modele;
-
     /**
      * Voiture constructor.
      * @param string $marque
@@ -21,38 +17,10 @@ class Voiture
     {
         $this->setMarque($marque);
         $this->setModele($modele);
-
     }
 
-    /**
-     * @param string $marque
-     */
-    private function setMarque(string $marque){
-        $this->marque=$marque;
+    function __toString()
+    {
+        return "je suis une voiture de la marque ".$this->getMarque().' '.$this->getModele();
     }
-
-    /**
-     * @return mixed
-     */
-    public function getMarque(){
-        return $this->marque;
-    }
-
-    /**
-     * @param $modele
-     */
-    private function setModele($modele){
-        if(is_null($modele)){
-            $modele='pas indiqué';
-        }
-        $this->modele=$modele;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getModele(){
-        return $this->modele;
-    }
-
 }
